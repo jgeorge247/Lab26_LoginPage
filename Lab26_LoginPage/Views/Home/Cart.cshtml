@@ -1,0 +1,22 @@
+﻿@using Lab26_LoginPage.Models;
+
+@{
+    ViewBag.Title = "Cart";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Product Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th></th>
+    </tr>
+    @foreach (Product p in ViewBag.Cart)
+    {
+        <tr>
+            <td>@p.Name - @p.Price</td>
+        </tr>
+    }
+</table>

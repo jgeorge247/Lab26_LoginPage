@@ -1,0 +1,26 @@
+﻿@using Lab26_LoginPage.Models;
+@{
+    ViewBag.Title = "Products";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<p>Gaze upon your Products</p>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Product Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th></th>
+    </tr>
+    @foreach (Product p in ViewBag.products)
+    {
+        <tr>
+            <td>@p.Name</td>
+            <td>@p.Description</td>
+            <td>@p.Price</td>
+            <td><a href="~/Home/AddToCart?id=@p.ID">Add to Cart</a></td>
+        </tr>
+    }
+</table>
