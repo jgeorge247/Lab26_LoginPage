@@ -13,7 +13,7 @@
         <th>Price</th>
         <th></th>
     </tr>
-    @foreach (Product p in ViewBag.Cart)
+    @foreach (Product p in (List<Product>)Session["Cart"])
     {
         <tr>
             <td>@p.Name - @p.Price</td>

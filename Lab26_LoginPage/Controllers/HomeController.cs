@@ -14,6 +14,7 @@ namespace Lab26_LoginPage.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult Products()
         {
             ViewBag.Message = "Products";
@@ -36,15 +37,16 @@ namespace Lab26_LoginPage.Controllers
             return View();
         }
 
-        public List<Product> AddToCart(int ID)
+        public ActionResult AddToCart(int ID)
         {
             ProductEntities db = new ProductEntities();
 
+            List<Product> cart;
             //check if the Cart object already exists
             if (Session["Cart"] == null)
             {
                 //if it doesn't, make a new list of books
-                List<Product> cart = new List<Product>();
+                cart = new List<Product>();
                 //add this item to it
                 cart.Add((from b in db.Products
                           where b.ID == ID
@@ -52,19 +54,17 @@ namespace Lab26_LoginPage.Controllers
                 //add the list to the session
                 Session.Add("Cart", cart);
                 
-                return cart;
-               
             }
             else
             {
                 //if it does exist, get the list
-                List<Product> cart = (List<Product>)(Session["Cart"]);
+                cart = (List<Product>)(Session["Cart"]);
                 //add this item to it
                 cart.Add((from b in db.Products
                           where b.ID == ID
                           select b).Single());
-                return cart;
             }
+            return View("Cart");
         }
     }
 }
